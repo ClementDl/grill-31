@@ -86,7 +86,8 @@
     .hero__info:not(:last-child){border-right:1px solid rgba(201,150,26,.15)}
     .hero__info-lbl{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--or);display:block;margin-bottom:3px}
     .hero__info-val{font-size:.85rem;color:rgba(255,255,255,.85)}
-    @media(max-width:640px){.hero__infos{flex-wrap:wrap}.hero__info{flex:1 1 50%}}
+    @media(max-width:640px){.hero__infos{flex-wrap:wrap}.hero__info{flex:1 1 50%;padding:14px 16px}}
+    @media(max-width:400px){.hero__info{flex:1 1 100%}}
 
     /* APROPOS */
     .apropos{padding:100px 0;background:var(--creme)}
@@ -305,7 +306,7 @@
         </div>
       </div>
     </div>
-    <div class="hero__infos container" style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);padding:0 24px;">
+    <div class="hero__infos">
       <div class="hero__info"><span class="hero__info-lbl">Note Google</span><span class="hero__info-val">⭐ 4,8 / 5 · 451 avis</span></div>
       <div class="hero__info"><span class="hero__info-lbl">Prix moyen</span><span class="hero__info-val">10 – 20€ / pers.</span></div>
       <div class="hero__info"><span class="hero__info-lbl">Viande</span><span class="hero__info-val">100% Halal certifiée</span></div>
