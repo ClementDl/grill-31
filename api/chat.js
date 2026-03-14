@@ -1,15 +1,7 @@
-// Vercel Serverless Function — Chatbot Le Grill 31
-// Nécessite la variable d'environnement ANTHROPIC_API_KEY dans Vercel
+// Vercel Serverless Function — Chatbot Le Grill 31 (CommonJS)
+const https = require('https');
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  const { message, history = [] } = req.body;
-  if (!message) return res.status(400).json({ error: 'Message requis' });
-
-  const SYSTEM = `Tu es l'assistant virtuel du restaurant Le Grill 31, situé au 67 Place Carnot, 59500 Douai.
+const SYSTEM = `Tu es l'assistant virtuel du restaurant Le Grill 31, situé au 67 Place Carnot, 59500 Douai.
 Tu réponds uniquement en français, de manière chaleureuse, concise et professionnelle.
 Tu ne réponds qu'aux questions concernant le restaurant. Pour toute autre question, redirige poliment vers le sujet du restaurant.
 
@@ -57,7 +49,7 @@ PLATS — tous accompagnés de lentilles à l'orientale et poivrons à la tomate
 - Lasagne de Bœuf — 15,90€
 - Merguez — 14,90€
 - 3 Côtelettes d'Agneau — 17,90€
-- Burger Le 31 — 16,90€ (sauce maison, légumes du soleil, 2 steaks marinés, cheddar, oignons caramélisés, tomates, roquette)
+- Burger Le 31 — 16,90€
 - Kefta — 15,50€
 - Saucisses — 14,90€
 - Melfouf — 14,90€ (foie d'agneau & crépine)
@@ -72,52 +64,77 @@ BOISSONS :
 - Sodas (Coca, Orangina, Sprite, Oasis, Lipton, Schweppes) — 3,00€
 - Jus (orange, pomme, ananas) — 3,00€
 - Sirop — 0,50€
-- Virgin Mojito (8 parfums : classique, passion, violette, hibiscus, pastèque, fraise, ananas, menthe) — 6,90€
+- Virgin Mojito (8 parfums) — 6,90€
 - Café Expresso — 1,70€ / Allongé — 2,00€ / Au lait — 2,00€
 - Cappuccino — 2,50€
-- Thé (menthe, infusion) — 2,00€
+- Thé (menthe, infusion) — 2,00€`;
 
-FAQ IMPORTANTES :
-- La viande est-elle halal ? OUI, toute notre viande est 100% halal certifiée.
-- Y a-t-il une terrasse ? Oui, le restaurant dispose d'une terrasse.
-- Acceptez-vous les enfants ? Oui, un menu enfant est disponible.
-- Peut-on réserver ? Oui, par téléphone au 03 59 43 31 23 ou via le formulaire sur le site.
-- La Bastella est-elle disponible tous les jours ? Non, uniquement le week-end.
-- Proposez-vous des options végétariennes ? Oui, les 2 Steaks Végétaux à 14,90€.`;
+module.exports = async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  const { message, history = [] } = req.body || {};
+  if (!message) return res.status(400).json({ error: 'Message requis' });
+
+  const apiKey = (process.env.ANTHROPIC_API_KEY || '').trim();
+  if (!apiKey) return res.status(500).json({ error: 'API key manquante' });
 
   const messages = [
-    ...history.slice(-6), // garde les 6 derniers échanges max
+    ...history.slice(-6),
     { role: 'user', content: message }
   ];
 
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+  const body = JSON.stringify({
+    model: 'claude-haiku-3-5',
+    max_tokens: 512,
+    system: SYSTEM,
+    messages,
+  });
+
+  return new Promise((resolve) => {
+    const options = {
+      hostname: 'api.anthropic.com',
+      path: '/v1/messages',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': (process.env.ANTHROPIC_API_KEY || '').trim(),
+        'Content-Length': Buffer.byteLength(body),
+        'x-api-key': apiKey,
         'anthropic-version': '2023-06-01',
       },
-      body: JSON.stringify({
-        model: 'claude-haiku-3-5',
-        max_tokens: 512,
-        system: SYSTEM,
-        messages,
-      }),
+    };
+
+    const req2 = https.request(options, (response) => {
+      let data = '';
+      response.on('data', (chunk) => { data += chunk; });
+      response.on('end', () => {
+        try {
+          const parsed = JSON.parse(data);
+          if (parsed.error) {
+            console.error('Anthropic error:', parsed.error);
+            res.status(500).json({ error: parsed.error.message });
+          } else {
+            res.status(200).json({ reply: parsed.content[0].text });
+          }
+        } catch (e) {
+          console.error('Parse error:', e, data);
+          res.status(500).json({ error: 'Parse error' });
+        }
+        resolve();
+      });
     });
 
-    if (!response.ok) {
-      const err = await response.text();
-      console.error('Anthropic error:', err);
-      return res.status(500).json({ error: 'Erreur API' });
-    }
+    req2.on('error', (e) => {
+      console.error('Request error:', e);
+      res.status(500).json({ error: e.message });
+      resolve();
+    });
 
-    const data = await response.json();
-    const reply = data.content[0].text;
-
-    return res.status(200).json({ reply });
-  } catch (e) {
-    console.error(e);
-    return res.status(500).json({ error: 'Erreur serveur' });
-  }
-}
+    req2.write(body);
+    req2.end();
+  });
+};

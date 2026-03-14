@@ -94,8 +94,8 @@
     @keyframes flame{0%,100%{transform:scale(1) rotate(-3deg)}50%{transform:scale(1.15) rotate(3deg)}}
     @keyframes fadeup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 
-    .hero__infos{position:absolute;bottom:0;left:0;right:0;z-index:2;display:flex}
-    .hero__info{flex:1;padding:18px 24px;background:rgba(17,17,17,.85);border-top:2px solid var(--or);backdrop-filter:blur(8px);animation:fadeup .8s ease .8s both}
+    .hero__infos{display:flex;background:var(--noir2);border-top:2px solid var(--or)}
+    .hero__info{flex:1;padding:18px 24px}
     .hero__info:not(:last-child){border-right:1px solid rgba(201,150,26,.15)}
     .hero__info-lbl{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--or);display:block;margin-bottom:3px}
     .hero__info-val{font-size:.85rem;color:rgba(255,255,255,.85)}
@@ -348,13 +348,15 @@
         </div>
       </div>
     </div>
-    <div class="hero__infos">
-      <div class="hero__info"><span class="hero__info-lbl">Note Google</span><span class="hero__info-val">⭐ 4,8 / 5 · 451 avis</span></div>
-      <div class="hero__info"><span class="hero__info-lbl">Prix moyen</span><span class="hero__info-val">10 – 20€ / pers.</span></div>
-      <div class="hero__info"><span class="hero__info-lbl">Viande</span><span class="hero__info-val">100% Halal certifiée</span></div>
-      <div class="hero__info"><span class="hero__info-lbl">Terrasse</span><span class="hero__info-val">Oui · Menu enfant dispo</span></div>
-    </div>
   </section>
+
+  <!-- INFOS BAR -->
+  <div class="hero__infos">
+    <div class="hero__info"><span class="hero__info-lbl">Note Google</span><span class="hero__info-val">⭐ 4,8 / 5 · 451 avis</span></div>
+    <div class="hero__info"><span class="hero__info-lbl">Prix moyen</span><span class="hero__info-val">10 – 20€ / pers.</span></div>
+    <div class="hero__info"><span class="hero__info-lbl">Viande</span><span class="hero__info-val">100% Halal certifiée</span></div>
+    <div class="hero__info"><span class="hero__info-lbl">Terrasse</span><span class="hero__info-val">Oui · Menu enfant dispo</span></div>
+  </div>
 
   <!-- À PROPOS -->
   <section class="apropos" id="apropos">
