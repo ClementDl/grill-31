@@ -42,14 +42,19 @@
     .diviseur.gauche::before{flex:0 0 40px;background:var(--or)}
 
     /* NAV */
-    .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 0;transition:all .4s}
-    .nav.scrolled{background:rgba(17,17,17,.97);backdrop-filter:blur(12px);padding:12px 0;border-bottom:1px solid rgba(201,150,26,.2)}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:1000;transition:all .4s;background:rgba(17,17,17,.0)}
+    .nav.scrolled{background:rgba(17,17,17,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,150,26,.2)}
+    .nav__top{padding:18px 0;transition:padding .4s}
+    .nav.scrolled .nav__top{padding:12px 0}
     .nav__inner{display:flex;align-items:center;justify-content:space-between}
     .nav__logo{display:flex;flex-direction:column;line-height:1.2}
     .nav__logo-main{font-family:var(--font-t);font-size:1.35rem;font-weight:700;color:var(--or);letter-spacing:.04em}
     .nav__logo-sub{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,232,192,.5)}
-    .nav__halal{font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--or);background:rgba(201,150,26,.12);border:1px solid rgba(201,150,26,.3);padding:3px 8px;display:none}
-    @media(max-width:820px){.nav__halal{display:inline-block}}
+    /* Tagline sous nav — desktop uniquement */
+    .nav__tagline{display:flex;align-items:center;gap:12px;background:rgba(201,150,26,.1);border-bottom:1px solid rgba(201,150,26,.15);padding:5px 0;overflow:hidden}
+    .nav__tagline span{font-size:.65rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--or-clair);white-space:nowrap}
+    .nav__tagline-sep{color:rgba(201,150,26,.35)!important}
+    @media(max-width:820px){.nav__tagline{display:none}}
     .nav__links{display:flex;align-items:center;gap:28px;list-style:none}
     .nav__links a{font-size:.76rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);position:relative;padding-bottom:2px;transition:color .3s}
     .nav__links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--or);transition:width .3s}
@@ -58,13 +63,18 @@
     .nav__cta{padding:10px 20px!important;background:var(--or)!important;color:var(--noir)!important;font-weight:600!important}
     .nav__cta::after{display:none!important}
     .nav__cta:hover{background:var(--or-clair)!important}
-    .nav__burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+    .nav__burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:10}
     .nav__burger span{display:block;width:22px;height:1.5px;background:var(--or);transition:all .3s}
+    /* Mobile menu — s'étend dans le flux normal (pas absolute) */
     @media(max-width:820px){
       .nav__burger{display:flex}
-      .nav__menu{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(17,17,17,.99);padding:24px;border-top:1px solid rgba(201,150,26,.2)}
-      .nav__menu.open{display:block}
-      .nav__links{flex-direction:column;align-items:flex-start;gap:18px;margin-bottom:18px}
+      #nav-links-desktop{display:none!important}
+      .nav__links{display:flex;flex-direction:column;align-items:flex-start;gap:18px;margin-top:0;margin-bottom:0}
+      .nav__mobile-info{display:none;font-size:.72rem;color:rgba(255,255,255,.5);padding:10px 0 6px;border-top:1px solid rgba(201,150,26,.15);margin-top:8px;line-height:1.9}
+      .nav__mobile-info.open{display:block}
+      .nav__menu-wrap{overflow:hidden;max-height:0;transition:max-height .35s ease;background:rgba(17,17,17,.98)}
+      .nav__menu-wrap.open{max-height:400px}
+      .nav__menu-inner{padding:16px 0 12px;border-top:1px solid rgba(201,150,26,.2)}
     }
 
     /* HERO */
@@ -271,22 +281,50 @@
 
   <!-- NAV -->
   <nav class="nav" id="nav">
-    <div class="container">
-      <div class="nav__inner">
-        <a href="#" class="nav__logo">
-          <span class="nav__logo-main">🔥 Le Grill 31</span>
-          <span class="nav__logo-sub">La grillade se met sur son 31</span>
-        </a>
-        <span class="nav__halal">✅ Halal · Douai</span>
-        <button class="nav__burger" id="burger"><span></span><span></span><span></span></button>
-        <div class="nav__menu" id="nav-menu">
-          <ul class="nav__links">
+    <!-- Tagline desktop -->
+    <div class="nav__tagline">
+      <div class="container" style="display:flex;align-items:center;gap:10px;padding-top:0;padding-bottom:0">
+        <span>📍 67 Place Carnot, Douai</span>
+        <span class="nav__tagline-sep">·</span>
+        <span>✅ 100% Halal</span>
+        <span class="nav__tagline-sep">·</span>
+        <span>⭐ 4,8/5 Google</span>
+        <span class="nav__tagline-sep">·</span>
+        <span>📞 03 59 43 31 23</span>
+      </div>
+    </div>
+    <!-- Main navbar -->
+    <div class="nav__top">
+      <div class="container">
+        <div class="nav__inner">
+          <a href="#" class="nav__logo">
+            <span class="nav__logo-main">🔥 Le Grill 31</span>
+            <span class="nav__logo-sub">La grillade se met sur son 31</span>
+          </a>
+          <!-- Desktop links -->
+          <ul class="nav__links" id="nav-links-desktop" style="display:flex">
             <li><a href="#apropos">À Propos</a></li>
             <li><a href="#menu">La Carte</a></li>
             <li><a href="#galerie">Galerie</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="#reservation" class="nav__cta">Réserver</a></li>
           </ul>
+          <button class="nav__burger" id="burger"><span></span><span></span><span></span></button>
+        </div>
+        <!-- Mobile dropdown — dans le flux, pas en absolute -->
+        <div class="nav__menu-wrap" id="nav-menu">
+          <div class="nav__menu-inner">
+            <ul class="nav__links">
+              <li><a href="#apropos">À Propos</a></li>
+              <li><a href="#menu">La Carte</a></li>
+              <li><a href="#galerie">Galerie</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#reservation" class="nav__cta">Réserver</a></li>
+            </ul>
+            <div class="nav__mobile-info open">
+              📍 67 Pl. Carnot, Douai · ✅ Halal · ⭐ 4,8/5 · 📞 03 59 43 31 23
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -561,8 +599,9 @@
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60), {passive:true});
     const burger = document.getElementById('burger');
-    burger.addEventListener('click', () => document.getElementById('nav-menu').classList.toggle('open'));
-    document.querySelectorAll('.nav__links a').forEach(a => a.addEventListener('click', () => document.getElementById('nav-menu').classList.remove('open')));
+    const navMenu = document.getElementById('nav-menu');
+    burger.addEventListener('click', () => navMenu.classList.toggle('open'));
+    document.querySelectorAll('.nav__links a').forEach(a => a.addEventListener('click', () => navMenu.classList.remove('open')));
 
     // ── Hero BG ──────────────────────────────────────
     const heroBg = document.getElementById('hero-bg');
