@@ -89,7 +89,7 @@ module.exports = async function handler(req, res) {
   ];
 
   const body = JSON.stringify({
-    model: 'claude-haiku-3-5',
+    model: 'claude-3-5-haiku-20241022',
     max_tokens: 512,
     system: SYSTEM,
     messages,
