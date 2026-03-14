@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Le Grill 31 — La grillade se met sur son 31 · Douai</title>
+  <meta name="description" content="Restaurant de grillades halal au cœur de Douai. 4,8⭐ · 67 Place Carnot · 03 59 43 31 23"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --noir:#111;--noir2:#1a1a1a;--noir3:#242424;
+      --or:#c9961a;--or-clair:#e6b840;--or-pale:#f5e8c0;
+      --blanc:#fff;--creme:#fdf9f3;--texte:#2a2a2a;--gris:#777;
+      --font-t:'Playfair Display',Georgia,serif;
+      --font-b:'Inter',sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font-b);background:var(--creme);color:var(--texte);overflow-x:hidden;font-weight:300;line-height:1.7}
+    img{display:block;width:100%;object-fit:cover}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1120px;margin:0 auto;padding:0 24px}
+
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.on{opacity:1;transform:none}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+    .btn{display:inline-block;font-family:var(--font-b);font-size:.82rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:14px 30px;cursor:pointer;border:none;transition:all .3s}
+    .btn--or{background:var(--or);color:var(--blanc)}
+    .btn--or:hover{background:var(--or-clair)}
+    .btn--outline{background:transparent;color:var(--or);border:1.5px solid var(--or)}
+    .btn--outline:hover{background:var(--or);color:var(--blanc)}
+
+    .label{display:block;font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--or);margin-bottom:12px}
+    .titre{font-family:var(--font-t);font-size:clamp(2rem,4.5vw,3.4rem);font-weight:700;color:var(--noir);line-height:1.1}
+    .titre em{font-style:italic;color:var(--or)}
+    .diviseur{display:flex;align-items:center;gap:12px;margin:16px 0;color:var(--or);font-size:.75rem}
+    .diviseur::before,.diviseur::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,150,26,.4),transparent)}
+    .diviseur.gauche::after{display:none}
+    .diviseur.gauche::before{flex:0 0 40px;background:var(--or)}
+
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 0;transition:all .4s}
+    .nav.scrolled{background:rgba(17,17,17,.97);backdrop-filter:blur(12px);padding:12px 0;border-bottom:1px solid rgba(201,150,26,.2)}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between}
+    .nav__logo{display:flex;flex-direction:column;line-height:1.2}
+    .nav__logo-main{font-family:var(--font-t);font-size:1.35rem;font-weight:700;color:var(--or);letter-spacing:.04em}
+    .nav__logo-sub{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,232,192,.5)}
+    .nav__links{display:flex;align-items:center;gap:28px;list-style:none}
+    .nav__links a{font-size:.76rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);position:relative;padding-bottom:2px;transition:color .3s}
+    .nav__links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--or);transition:width .3s}
+    .nav__links a:hover{color:var(--or-clair)}
+    .nav__links a:hover::after{width:100%}
+    .nav__cta{padding:10px 20px!important;background:var(--or)!important;color:var(--noir)!important;font-weight:600!important}
+    .nav__cta::after{display:none!important}
+    .nav__cta:hover{background:var(--or-clair)!important}
+    .nav__burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+    .nav__burger span{display:block;width:22px;height:1.5px;background:var(--or);transition:all .3s}
+    @media(max-width:820px){
+      .nav__burger{display:flex}
+      .nav__menu{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(17,17,17,.99);padding:24px;border-top:1px solid rgba(201,150,26,.2)}
+      .nav__menu.open{display:block}
+      .nav__links{flex-direction:column;align-items:flex-start;gap:18px;margin-bottom:18px}
+    }
+
+    /* HERO */
+    .hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;overflow:hidden}
+    .hero__bg{position:absolute;inset:0;background:url('images/salle.jpg') center/cover no-repeat;transform:scale(1.04);transition:transform 8s ease}
+    .hero__bg.ready{transform:scale(1)}
+    .hero__overlay{position:absolute;inset:0;background:linear-gradient(110deg,rgba(17,17,17,.88) 0%,rgba(17,17,17,.55) 60%,rgba(17,17,17,.75) 100%)}
+    .hero__content{position:relative;z-index:2;max-width:640px}
+    .hero__badge{display:inline-flex;align-items:center;gap:10px;background:rgba(201,150,26,.15);border:1px solid rgba(201,150,26,.35);padding:7px 18px;margin-bottom:24px;animation:fadeup .8s ease .1s both}
+    .hero__badge span{font-size:.7rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--or-clair)}
+    .hero__title{font-family:var(--font-t);font-size:clamp(3rem,7.5vw,5.5rem);font-style:italic;font-weight:700;color:var(--blanc);line-height:1;margin-bottom:20px;animation:fadeup .8s ease .25s both}
+    .hero__title strong{font-style:normal;color:var(--or);display:block;font-size:.55em;letter-spacing:.06em}
+    .hero__sub{font-size:1rem;color:rgba(255,255,255,.72);max-width:480px;margin-bottom:36px;line-height:1.8;animation:fadeup .8s ease .45s both}
+    .hero__btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeup .8s ease .6s both}
+    .hero__flame{font-size:1.4rem;animation:flame 1.5s ease infinite}
+    @keyframes flame{0%,100%{transform:scale(1) rotate(-3deg)}50%{transform:scale(1.15) rotate(3deg)}}
+    @keyframes fadeup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+    .hero__infos{position:absolute;bottom:0;left:0;right:0;z-index:2;display:flex}
+    .hero__info{flex:1;padding:18px 24px;background:rgba(17,17,17,.85);border-top:2px solid var(--or);backdrop-filter:blur(8px);animation:fadeup .8s ease .8s both}
+    .hero__info:not(:last-child){border-right:1px solid rgba(201,150,26,.15)}
+    .hero__info-lbl{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--or);display:block;margin-bottom:3px}
+    .hero__info-val{font-size:.85rem;color:rgba(255,255,255,.85)}
+    @media(max-width:640px){.hero__infos{flex-wrap:wrap}.hero__info{flex:1 1 50%}}
+
+    /* APROPOS */
+    .apropos{padding:100px 0;background:var(--creme)}
+    .apropos__grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+    .apropos__img{position:relative}
+    .apropos__img img{height:500px;filter:brightness(.96) contrast(1.04)}
+    .apropos__img::before{content:'';position:absolute;inset:-14px;border:1.5px solid rgba(201,150,26,.25);pointer-events:none;z-index:1}
+    .apropos__badge{position:absolute;bottom:24px;left:-20px;background:var(--or);color:var(--noir);padding:14px 20px;font-family:var(--font-t);font-style:italic;font-size:1.1rem;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+    .apropos__text p{font-size:.98rem;color:#4a3a28;line-height:1.9;margin-bottom:16px}
+    .apropos__tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+    .apropos__tag{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:rgba(201,150,26,.08);border:1px solid rgba(201,150,26,.2);font-size:.78rem;font-weight:500;color:#5a3e10}
+    @media(max-width:820px){.apropos__grid{grid-template-columns:1fr}.apropos__img img{height:300px}.apropos__badge{left:0}}
+
+    /* MENU */
+    .menu{padding:100px 0;background:#fff}
+    .menu__header{text-align:center;margin-bottom:52px}
+    .menu__tabs{display:flex;justify-content:center;gap:4px;flex-wrap:wrap;border-bottom:2px solid #f0e8d8;margin-bottom:40px}
+    .menu__tab{font-family:var(--font-b);font-size:.76rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;background:none;border:none;cursor:pointer;padding:12px 20px;color:var(--gris);border-bottom:2.5px solid transparent;margin-bottom:-2px;transition:all .3s}
+    .menu__tab:hover{color:var(--or)}
+    .menu__tab.active{color:var(--noir);border-bottom-color:var(--or)}
+    .menu__panel{display:none}
+    .menu__panel.active{display:block}
+    .plats__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px}
+    .plat{padding:22px 18px;border-bottom:1px solid #f0e8d8;transition:background .25s}
+    .plat:hover{background:#fdf5e8}
+    .plat__top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:5px}
+    .plat__nom{font-family:var(--font-t);font-size:1.02rem;font-weight:600;color:var(--noir)}
+    .plat__prix{font-weight:700;font-size:.92rem;color:var(--or);white-space:nowrap;flex-shrink:0}
+    .plat__desc{font-size:.82rem;color:var(--gris);line-height:1.55}
+    .plat--star{background:rgba(201,150,26,.04);border-left:3px solid var(--or)}
+    .menu__note{text-align:center;font-size:.82rem;color:var(--gris);margin-top:24px;font-style:italic}
+
+    /* GALERIE */
+    .galerie{padding:100px 0;background:var(--creme)}
+    .galerie__header{text-align:center;margin-bottom:48px}
+    .galerie__grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:240px 240px;gap:8px}
+    .galerie__item{overflow:hidden;position:relative;cursor:pointer}
+    .galerie__item:nth-child(1){grid-column:span 2}
+    .galerie__item:nth-child(4){grid-column:span 2}
+    .galerie__item img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .6s}
+    .galerie__item:hover img{transform:scale(1.06);filter:brightness(1.04)}
+    .galerie__ov{position:absolute;inset:0;background:rgba(17,17,17,0);display:flex;align-items:flex-end;padding:16px;transition:background .4s}
+    .galerie__ov span{font-family:var(--font-t);font-style:italic;font-size:.95rem;color:var(--blanc);opacity:0;transition:opacity .35s;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+    .galerie__item:hover .galerie__ov{background:rgba(17,17,17,.35)}
+    .galerie__item:hover .galerie__ov span{opacity:1}
+    @media(max-width:620px){.galerie__grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.galerie__item:nth-child(1),.galerie__item:nth-child(4){grid-column:span 1}}
+
+    /* RESERVATION */
+    .reservation{padding:100px 0;background:var(--noir2)}
+    .reservation__grid{display:grid;grid-template-columns:1fr 1.2fr;gap:72px;align-items:start}
+    .reservation .titre{color:var(--blanc)}
+    .reservation .label{color:var(--or-clair)}
+    .resa-info p{font-size:.92rem;color:rgba(255,255,255,.65);line-height:1.9;margin-bottom:20px}
+    .resa-detail{margin-bottom:16px}
+    .resa-detail-lbl{font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--or);display:block;margin-bottom:3px}
+    .resa-detail-val{font-size:.92rem;color:rgba(255,255,255,.85)}
+    .resa-detail-val a{color:var(--or-clair)}
+    .form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .form__group{position:relative}
+    .form__group--full{grid-column:span 2}
+    .form__label{position:absolute;top:15px;left:14px;font-size:.82rem;color:rgba(255,255,255,.4);pointer-events:none;transition:all .3s}
+    .form__input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(201,150,26,.2);padding:26px 14px 10px;font-family:var(--font-b);font-size:.88rem;color:var(--blanc);outline:none;transition:border-color .3s;-webkit-appearance:none;border-radius:0}
+    .form__input option{background:var(--noir2)}
+    .form__input:focus{border-color:var(--or)}
+    .form__input:focus+.form__label,.form__input:not(:placeholder-shown)+.form__label,.form__input:valid+.form__label{top:7px;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--or)}
+    textarea.form__input{resize:vertical;min-height:100px}
+    .form__submit{grid-column:span 2}
+    .form__submit .btn{width:100%;text-align:center;padding:16px}
+    .form__ok{display:none;grid-column:span 2;padding:16px;background:rgba(201,150,26,.12);border:1px solid var(--or);text-align:center;font-size:.88rem;color:var(--or-clair)}
+    @media(max-width:820px){.reservation__grid{grid-template-columns:1fr}.form{grid-template-columns:1fr}.form__group--full,.form__submit{grid-column:span 1}}
+
+    /* CONTACT */
+    .contact{padding:80px 0;background:var(--noir)}
+    .contact__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+    .contact-card{padding:32px 24px;background:var(--noir2);transition:background .3s}
+    .contact-card:hover{background:rgba(201,150,26,.07)}
+    .contact-card__icon{font-size:1.8rem;color:var(--or);margin-bottom:12px}
+    .contact-card__lbl{font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:7px}
+    .contact-card__val{font-size:.88rem;color:rgba(255,255,255,.8);line-height:1.7}
+    .contact-card__val a{color:var(--or-clair);transition:color .3s}
+    .contact-card__val a:hover{color:var(--or)}
+    @media(max-width:760px){.contact__grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:440px){.contact__grid{grid-template-columns:1fr}}
+
+    /* FOOTER */
+    .footer{background:#0a0a0a;border-top:2px solid rgba(201,150,26,.2);padding:36px 0}
+    .footer__inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+    .footer__logo{font-family:var(--font-t);font-size:1.1rem;font-weight:700;color:var(--or)}
+    .footer__copy{font-size:.72rem;color:rgba(255,255,255,.25)}
+
+    /* ═══════════════════════════════
+       CHATBOT
+    ═══════════════════════════════ */
+    .chat-bubble{
+      position:fixed;bottom:28px;right:28px;z-index:2000;
+      width:56px;height:56px;border-radius:50%;
+      background:var(--or);border:none;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.5rem;box-shadow:0 4px 20px rgba(201,150,26,.4);
+      transition:transform .3s,box-shadow .3s;
+    }
+    .chat-bubble:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(201,150,26,.55)}
+    .chat-bubble__notif{
+      position:absolute;top:-4px;right:-4px;
+      width:18px;height:18px;border-radius:50%;
+      background:#e74c3c;color:#fff;
+      font-size:.65rem;font-weight:700;
+      display:flex;align-items:center;justify-content:center;
+    }
+
+    .chat-window{
+      position:fixed;bottom:96px;right:28px;z-index:2000;
+      width:360px;max-width:calc(100vw - 40px);
+      background:var(--blanc);border-radius:16px;
+      box-shadow:0 8px 40px rgba(0,0,0,.18);
+      display:flex;flex-direction:column;
+      overflow:hidden;
+      transform:scale(.9) translateY(20px);opacity:0;
+      pointer-events:none;
+      transition:transform .3s ease,opacity .3s ease;
+    }
+    .chat-window.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+
+    .chat-header{
+      background:var(--or);padding:16px 18px;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .chat-header__left{display:flex;align-items:center;gap:10px}
+    .chat-header__avatar{
+      width:36px;height:36px;border-radius:50%;
+      background:rgba(0,0,0,.2);
+      display:flex;align-items:center;justify-content:center;font-size:1rem;
+    }
+    .chat-header__info-name{font-family:var(--font-t);font-size:.95rem;font-weight:700;color:var(--noir)}
+    .chat-header__info-status{font-size:.65rem;color:rgba(0,0,0,.55);display:flex;align-items:center;gap:4px}
+    .chat-header__info-status::before{content:'';width:6px;height:6px;border-radius:50%;background:#27ae60;flex-shrink:0}
+    .chat-close{background:none;border:none;cursor:pointer;color:var(--noir);font-size:1.1rem;opacity:.6;transition:opacity .2s}
+    .chat-close:hover{opacity:1}
+
+    .chat-messages{
+      flex:1;padding:16px;overflow-y:auto;
+      display:flex;flex-direction:column;gap:12px;
+      max-height:340px;min-height:200px;
+      background:#fafafa;
+    }
+    .chat-msg{display:flex;gap:8px;max-width:85%}
+    .chat-msg--bot{align-self:flex-start}
+    .chat-msg--user{align-self:flex-end;flex-direction:row-reverse}
+    .chat-msg__avatar{
+      width:28px;height:28px;border-radius:50%;flex-shrink:0;
+      background:var(--or);display:flex;align-items:center;justify-content:center;font-size:.75rem;
+      align-self:flex-end;
+    }
+    .chat-msg__bubble{
+      padding:10px 14px;border-radius:16px;font-size:.84rem;line-height:1.55;
+    }
+    .chat-msg--bot .chat-msg__bubble{background:#fff;color:var(--texte);border-bottom-left-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+    .chat-msg--user .chat-msg__bubble{background:var(--or);color:var(--blanc);border-bottom-right-radius:4px}
+    .chat-typing{display:flex;gap:5px;align-items:center;padding:10px 14px;background:#fff;border-radius:16px;border-bottom-left-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,.08);width:fit-content}
+    .chat-typing span{width:6px;height:6px;border-radius:50%;background:var(--or);animation:typing 1.2s ease infinite}
+    .chat-typing span:nth-child(2){animation-delay:.2s}
+    .chat-typing span:nth-child(3){animation-delay:.4s}
+    @keyframes typing{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+
+    .chat-suggestions{padding:8px 12px;display:flex;gap:6px;flex-wrap:wrap;background:#f5f5f5;border-top:1px solid #eee}
+    .chat-sug{font-size:.72rem;padding:5px 10px;background:#fff;border:1px solid #e0d5c5;color:#5a4020;border-radius:20px;cursor:pointer;transition:all .2s;white-space:nowrap}
+    .chat-sug:hover{background:var(--or);color:#fff;border-color:var(--or)}
+
+    .chat-input-row{padding:12px;border-top:1px solid #f0e8d8;display:flex;gap:8px;background:#fff}
+    .chat-input{flex:1;border:1px solid #e8dcc8;padding:10px 14px;font-family:var(--font-b);font-size:.85rem;color:var(--texte);outline:none;border-radius:24px;transition:border-color .3s;background:#fdfaf6}
+    .chat-input:focus{border-color:var(--or)}
+    .chat-send{width:38px;height:38px;border-radius:50%;background:var(--or);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:background .3s;flex-shrink:0}
+    .chat-send:hover{background:var(--or-clair)}
+    .chat-send:disabled{opacity:.5;cursor:not-allowed}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="#" class="nav__logo">
+          <span class="nav__logo-main">🔥 Le Grill 31</span>
+          <span class="nav__logo-sub">La grillade se met sur son 31</span>
+        </a>
+        <button class="nav__burger" id="burger"><span></span><span></span><span></span></button>
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__links">
+            <li><a href="#apropos">À Propos</a></li>
+            <li><a href="#menu">La Carte</a></li>
+            <li><a href="#galerie">Galerie</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#reservation" class="nav__cta">Réserver</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="accueil">
+    <div class="hero__bg" id="hero-bg"></div>
+    <div class="hero__overlay"></div>
+    <div class="container">
+      <div class="hero__content">
+        <div class="hero__badge"><span>🔥 Douai · Place Carnot · 100% Halal</span></div>
+        <h1 class="hero__title">
+          <strong>Le Grill 31</strong>
+          La grillade se met<br>sur son 31
+        </h1>
+        <p class="hero__sub">Grillades premium, saveurs du soleil, et une ambiance chaleureuse au cœur de Douai. <span class="hero__flame">🔥</span></p>
+        <div class="hero__btns">
+          <a href="#menu" class="btn btn--or">Voir la carte</a>
+          <a href="#reservation" class="btn btn--outline" style="color:var(--or-pale);border-color:rgba(245,232,192,.4);">Réserver</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero__infos container" style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);padding:0 24px;">
+      <div class="hero__info"><span class="hero__info-lbl">Note Google</span><span class="hero__info-val">⭐ 4,8 / 5 · 451 avis</span></div>
+      <div class="hero__info"><span class="hero__info-lbl">Prix moyen</span><span class="hero__info-val">10 – 20€ / pers.</span></div>
+      <div class="hero__info"><span class="hero__info-lbl">Viande</span><span class="hero__info-val">100% Halal certifiée</span></div>
+      <div class="hero__info"><span class="hero__info-lbl">Terrasse</span><span class="hero__info-val">Oui · Menu enfant dispo</span></div>
+    </div>
+  </section>
+
+  <!-- À PROPOS -->
+  <section class="apropos" id="apropos">
+    <div class="container">
+      <div class="apropos__grid">
+        <div class="apropos__img reveal">
+          <img src="images/salle.jpg" alt="Salle du Grill 31, décor élégant doré" />
+          <div class="apropos__badge">Depuis 2022 à Douai</div>
+        </div>
+        <div>
+          <span class="label reveal">Notre Restaurant</span>
+          <h2 class="titre reveal d1">L'art de la <em>grillade</em></h2>
+          <div class="diviseur gauche reveal d2"><span>🔥</span></div>
+          <p class="reveal d2">Au cœur de la Place Carnot, Le Grill 31 vous accueille dans un cadre élégant et chaleureux pour une expérience culinaire autour de la grillade. Viandes marinées, spécialités orientales, et une sélection gourmande qui ravit petits et grands.</p>
+          <p class="reveal d3">Toute notre viande est <strong>100% halal certifiée</strong>. Chaque plat est accompagné de lentilles à l'orientale et de poivrons à la tomate — notre signature maison.</p>
+          <div class="apropos__tags reveal d4">
+            <div class="apropos__tag">✅ Viande Halal</div>
+            <div class="apropos__tag">🌿 Terrasse</div>
+            <div class="apropos__tag">👶 Menu Enfant</div>
+            <div class="apropos__tag">⭐ 4,8/5 Google</div>
+            <div class="apropos__tag">📍 Place Carnot</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <div class="container">
+      <div class="menu__header">
+        <span class="label reveal">La Carte</span>
+        <h2 class="titre reveal d1">Nos <em>spécialités</em></h2>
+        <div class="diviseur reveal d2"><span>🔥</span></div>
+      </div>
+      <div class="menu__tabs reveal d2">
+        <button class="menu__tab active" data-tab="entrees">Entrées</button>
+        <button class="menu__tab" data-tab="plats">Plats</button>
+        <button class="menu__tab" data-tab="sandwichs">Sandwichs</button>
+        <button class="menu__tab" data-tab="desserts">Desserts</button>
+        <button class="menu__tab" data-tab="boissons">Boissons</button>
+        <button class="menu__tab" data-tab="enfant">Menu Enfant</button>
+      </div>
+
+      <div class="menu__panel active" id="tab-entrees">
+        <div class="plats__grid">
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Salade Composée</span><span class="plat__prix">8,50 €</span></div><p class="plat__desc">Carottes râpées, betteraves, concombres, tomates, maïs, olives noires, salade iceberg, thon</p></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Mi-Cuit Pistache</span><span class="plat__prix">8,50 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">M'hencha</span><span class="plat__prix">8,50 €</span></div><p class="plat__desc">Feuille de pastilla composée de petits légumes et poulet</p></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Soupe du Jour</span><span class="plat__prix">5,90 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Burrata</span><span class="plat__prix">8,50 €</span></div></div>
+          <div class="plat plat--star"><div class="plat__top"><span class="plat__nom">⭐ Bastella Poulet Amande</span><span class="plat__prix">9,90 €</span></div><p class="plat__desc">Uniquement le week-end</p></div>
+        </div>
+      </div>
+
+      <div class="menu__panel" id="tab-plats">
+        <p class="menu__note" style="margin-bottom:20px;">Tous nos plats sont accompagnés de lentilles à l'orientale et de poivrons à la tomate · Accompagnement au choix · Sauce maison</p>
+        <div class="plats__grid">
+          <div class="plat"><div class="plat__top"><span class="plat__nom">2 Steaks Végétaux</span><span class="plat__prix">14,90 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">2 Brochettes de Poulet</span><span class="plat__prix">15,50 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">2 Brochettes d'Agneau</span><span class="plat__prix">17,90 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">2 Brochettes de Veau</span><span class="plat__prix">17,00 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">2 Brochettes de Bœuf</span><span class="plat__prix">17,90 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Lasagne de Bœuf</span><span class="plat__prix">15,90 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Merguez</span><span class="plat__prix">14,90 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">3 Côtelettes d'Agneau</span><span class="plat__prix">17,90 €</span></div></div>
+          <div class="plat plat--star"><div class="plat__top"><span class="plat__nom">🏆 Burger Le 31</span><span class="plat__prix">16,90 €</span></div><p class="plat__desc">Sauce maison, légumes du soleil, 2 steaks marinés, cheddar, oignons caramélisés, tomates, roquette</p></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Kefta</span><span class="plat__prix">15,50 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Saucisses</span><span class="plat__prix">14,90 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Melfouf</span><span class="plat__prix">14,90 €</span></div><p class="plat__desc">Foie d'agneau & crépine</p></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Entrecôte de Bœuf</span><span class="plat__prix">24,90 €</span></div><p class="plat__desc">Classique</p></div>
+          <div class="plat plat--star"><div class="plat__top"><span class="plat__nom">🥩 Entrecôte Maturée</span><span class="plat__prix">34,90 €</span></div><p class="plat__desc">Pièce d'exception</p></div>
+        </div>
+      </div>
+
+      <div class="menu__panel" id="tab-sandwichs">
+        <p class="menu__note" style="margin-bottom:20px;">Tous nos sandwichs sont servis avec salade, tomates, oignons, carottes râpées et maïs</p>
+        <div class="plats__grid">
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Poulet</span><span class="plat__prix">8,90 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Saucisse</span><span class="plat__prix">8,90 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Viande Hachée</span><span class="plat__prix">8,90 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Merguez</span><span class="plat__prix">8,90 €</span></div></div>
+        </div>
+      </div>
+
+      <div class="menu__panel" id="tab-desserts">
+        <div class="plats__grid">
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Tiramisu Spéculoos</span><span class="plat__prix">7,50 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Fondant Chocolat</span><span class="plat__prix">7,50 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Brioche Perdue Fourrée Nutella</span><span class="plat__prix">7,50 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Assiette de Fruits</span><span class="plat__prix">7,50 €</span></div></div>
+        </div>
+      </div>
+
+      <div class="menu__panel" id="tab-boissons">
+        <div class="plats__grid">
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Sodas (Coca, Orangina, Sprite, Oasis, Lipton, Schweppes)</span><span class="plat__prix">3,00 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Jus (orange, pomme, ananas)</span><span class="plat__prix">3,00 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Eau plate / pétillante 50cl</span><span class="plat__prix">3,50 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Eau plate / pétillante 1L</span><span class="plat__prix">4,90 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Sirop</span><span class="plat__prix">0,50 €</span></div></div>
+          <div class="plat plat--star"><div class="plat__top"><span class="plat__nom">🍹 Virgin Mojito (8 parfums)</span><span class="plat__prix">6,90 €</span></div><p class="plat__desc">Classique, Passion, Violette, Hibiscus, Pastèque, Fraise, Ananas, Menthe</p></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Café Expresso</span><span class="plat__prix">1,70 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Thé (menthe, infusion)</span><span class="plat__prix">2,00 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Cappuccino</span><span class="plat__prix">2,50 €</span></div></div>
+          <div class="plat"><div class="plat__top"><span class="plat__nom">Café allongé / au lait</span><span class="plat__prix">2,00 €</span></div></div>
+        </div>
+      </div>
+
+      <div class="menu__panel" id="tab-enfant">
+        <div style="max-width:500px;margin:0 auto;padding:40px 24px;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:16px;">👶</div>
+          <h3 style="font-family:var(--font-t);font-size:1.5rem;color:var(--noir);margin-bottom:12px;">Menu Enfant</h3>
+          <div class="diviseur"><span>🔥</span></div>
+          <p style="font-size:.92rem;color:var(--gris);margin-bottom:20px;">Un menu complet pensé pour les petits gourmands</p>
+          <ul style="list-style:none;font-size:.92rem;color:var(--texte);line-height:2.2;">
+            <li>🥩 Brochette de Poulet <em>ou</em> Merguez <em>ou</em> Saucisse</li>
+            <li>🍟 Frites fraîches + Crudités</li>
+            <li>🥤 Boisson incluse</li>
+            <li>🍮 Compote incluse</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section class="galerie" id="galerie">
+    <div class="container">
+      <div class="galerie__header">
+        <span class="label reveal">Galerie</span>
+        <h2 class="titre reveal d1">En <em>images</em></h2>
+        <div class="diviseur reveal d2"><span>🔥</span></div>
+      </div>
+      <div class="galerie__grid reveal d2">
+        <div class="galerie__item"><img src="images/facade.jpg" alt="Façade du Grill 31, enseigne flammes"/><div class="galerie__ov"><span>Notre façade</span></div></div>
+        <div class="galerie__item"><img src="images/grillade.jpg" alt="Brochettes grillées et salades"/><div class="galerie__ov"><span>Grillades maison</span></div></div>
+        <div class="galerie__item"><img src="images/dessert.jpg" alt="Mi-cuit pistache, dessert signature"/><div class="galerie__ov"><span>Nos desserts</span></div></div>
+        <div class="galerie__item"><img src="images/salle.jpg" alt="Salle du restaurant, décor doré élégant"/><div class="galerie__ov"><span>Notre salle</span></div></div>
+        <div class="galerie__item"><img src="images/cocktails.jpg" alt="Virgin mojitos colorés"/><div class="galerie__ov"><span>Nos cocktails</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÉSERVATION -->
+  <section class="reservation" id="reservation">
+    <div class="container">
+      <div class="reservation__grid">
+        <div>
+          <span class="label reveal">Réservation</span>
+          <h2 class="titre reveal d1">Réservez<br><em>votre table</em></h2>
+          <div class="diviseur gauche reveal d2" style="--or:#e6b840;"><span>🔥</span></div>
+          <div class="resa-info reveal d2"><p>Pour garantir votre table, réservez en ligne ou appelez-nous. Pour les groupes et événements privatifs, contactez-nous directement.</p></div>
+          <div class="resa-detail reveal d3"><span class="resa-detail-lbl">Adresse</span><span class="resa-detail-val">67 Place Carnot, 59500 Douai</span></div>
+          <div class="resa-detail reveal d3"><span class="resa-detail-lbl">Téléphone</span><span class="resa-detail-val"><a href="tel:0359433123">03 59 43 31 23</a></span></div>
+          <div class="resa-detail reveal d4"><span class="resa-detail-lbl">Horaires</span><span class="resa-detail-val">Mar–Ven 12h–14h / 19h–22h<br>Sam 12h–14h30 / 19h–22h30<br>Dim 12h–15h · Lun Fermé</span></div>
+        </div>
+        <form class="form reveal d2" id="form-resa" novalidate>
+          <div class="form__group"><input type="text" class="form__input" id="prenom" placeholder=" " required/><label class="form__label" for="prenom">Prénom</label></div>
+          <div class="form__group"><input type="text" class="form__input" id="nom" placeholder=" " required/><label class="form__label" for="nom">Nom</label></div>
+          <div class="form__group"><input type="email" class="form__input" id="email" placeholder=" " required/><label class="form__label" for="email">Email</label></div>
+          <div class="form__group"><input type="tel" class="form__input" id="tel" placeholder=" "/><label class="form__label" for="tel">Téléphone</label></div>
+          <div class="form__group"><input type="date" class="form__input" id="date" placeholder=" " required/><label class="form__label" for="date">Date</label></div>
+          <div class="form__group">
+            <select class="form__input" id="heure" required>
+              <option value="" disabled selected></option>
+              <option>12h00</option><option>12h30</option><option>13h00</option>
+              <option>19h00</option><option>19h30</option><option>20h00</option><option>20h30</option>
+            </select>
+            <label class="form__label" for="heure">Heure</label>
+          </div>
+          <div class="form__group"><input type="number" class="form__input" id="couverts" placeholder=" " min="1" max="20" required/><label class="form__label" for="couverts">Nombre de personnes</label></div>
+          <div class="form__group">
+            <select class="form__input" id="occasion">
+              <option value="" disabled selected></option>
+              <option>Repas en famille</option><option>Anniversaire</option><option>Affaires</option><option>Soirée romantique</option><option>Autre</option>
+            </select>
+            <label class="form__label" for="occasion">Occasion (optionnel)</label>
+          </div>
+          <div class="form__group form__group--full"><textarea class="form__input" id="msg" placeholder=" "></textarea><label class="form__label" for="msg">Message (allergies, demandes spéciales…)</label></div>
+          <div class="form__submit"><button type="submit" class="btn btn--or">Confirmer la réservation</button></div>
+          <div class="form__ok" id="form-ok">✓ Réservation reçue ! On vous confirme sous 2h. 🔥</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact__grid">
+        <div class="contact-card reveal"><div class="contact-card__icon">📍</div><p class="contact-card__lbl">Adresse</p><p class="contact-card__val">67 Place Carnot<br>59500 Douai</p></div>
+        <div class="contact-card reveal d1"><div class="contact-card__icon">📞</div><p class="contact-card__lbl">Téléphone</p><p class="contact-card__val"><a href="tel:0359433123">03 59 43 31 23</a></p></div>
+        <div class="contact-card reveal d2"><div class="contact-card__icon">🕐</div><p class="contact-card__lbl">Horaires</p><p class="contact-card__val">Mar–Sam : 12h–14h / 19h–22h<br>Dim : 12h–15h<br>Lun : Fermé</p></div>
+        <div class="contact-card reveal d3"><div class="contact-card__icon">✅</div><p class="contact-card__lbl">Viande</p><p class="contact-card__val">100% Halal<br>certifiée</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__logo">🔥 Le Grill 31</div>
+        <p class="footer__copy">© 2025 Le Grill 31 · Tous droits réservés · 67 Place Carnot, Douai</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CHATBOT -->
+  <button class="chat-bubble" id="chat-bubble" aria-label="Ouvrir le chatbot">
+    💬
+    <span class="chat-bubble__notif">1</span>
+  </button>
+
+  <div class="chat-window" id="chat-window">
+    <div class="chat-header">
+      <div class="chat-header__left">
+        <div class="chat-header__avatar">🔥</div>
+        <div>
+          <p class="chat-header__info-name">Assistant Le Grill 31</p>
+          <p class="chat-header__info-status">En ligne · Répond instantanément</p>
+        </div>
+      </div>
+      <button class="chat-close" id="chat-close">✕</button>
+    </div>
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-suggestions" id="chat-sugs">
+      <button class="chat-sug" data-q="La viande est-elle halal ?">Viande halal ?</button>
+      <button class="chat-sug" data-q="Quels sont vos horaires ?">Horaires</button>
+      <button class="chat-sug" data-q="Comment réserver une table ?">Réserver</button>
+      <button class="chat-sug" data-q="Quels sont vos plats signature ?">Plats signature</button>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" class="chat-input" id="chat-input" placeholder="Posez votre question…" />
+      <button class="chat-send" id="chat-send">➤</button>
+    </div>
+  </div>
+
+  <script>
+    // ── Nav ──────────────────────────────────────────
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60), {passive:true});
+    const burger = document.getElementById('burger');
+    burger.addEventListener('click', () => document.getElementById('nav-menu').classList.toggle('open'));
+    document.querySelectorAll('.nav__links a').forEach(a => a.addEventListener('click', () => document.getElementById('nav-menu').classList.remove('open')));
+
+    // ── Hero BG ──────────────────────────────────────
+    const heroBg = document.getElementById('hero-bg');
+    const img = new Image();
+    img.src = 'images/facade.jpg';
+    img.onload = () => { heroBg.style.backgroundImage = `url('${img.src}')`; heroBg.classList.add('ready'); };
+
+    // ── Scroll reveal ────────────────────────────────
+    const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting){x.target.classList.add('on');obs.unobserve(x.target);} }), {threshold:.1});
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // ── Menu tabs ────────────────────────────────────
+    document.querySelectorAll('.menu__tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.menu__tab').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.menu__panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // ── Date min ──────────────────────────────────────
+    const di = document.getElementById('date');
+    if(di) di.min = new Date().toISOString().split('T')[0];
+
+    // ── Form ──────────────────────────────────────────
+    document.getElementById('form-resa').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('[type=submit]');
+      btn.textContent = '…'; btn.disabled = true;
+      setTimeout(() => {
+        document.getElementById('form-ok').style.display = 'block';
+        this.reset(); btn.textContent = 'Confirmer la réservation'; btn.disabled = false;
+      }, 800);
+    });
+
+    // ── Smooth scroll ─────────────────────────────────
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+      });
+    });
+
+    // ── CHATBOT ───────────────────────────────────────
+    const chatBubble = document.getElementById('chat-bubble');
+    const chatWindow = document.getElementById('chat-window');
+    const chatClose  = document.getElementById('chat-close');
+    const chatMsgs   = document.getElementById('chat-messages');
+    const chatInput  = document.getElementById('chat-input');
+    const chatSend   = document.getElementById('chat-send');
+    const notif      = chatBubble.querySelector('.chat-bubble__notif');
+    let history      = [];
+    let isOpen       = false;
+
+    function toggleChat(open) {
+      isOpen = open;
+      chatWindow.classList.toggle('open', open);
+      if (open && notif) { notif.style.display = 'none'; }
+      if (open && chatMsgs.children.length === 0) {
+        addMsg('bot', 'Bonjour ! 👋 Bienvenue au **Grill 31**. Je suis votre assistant. Je peux vous renseigner sur notre carte, nos horaires, la viande halal, les réservations… Comment puis-je vous aider ?');
+      }
+    }
+
+    chatBubble.addEventListener('click', () => toggleChat(!isOpen));
+    chatClose.addEventListener('click', () => toggleChat(false));
+
+    function addMsg(role, text) {
+      const div = document.createElement('div');
+      div.className = `chat-msg chat-msg--${role}`;
+      const avatar = document.createElement('div');
+      avatar.className = 'chat-msg__avatar';
+      avatar.textContent = role === 'bot' ? '🔥' : '👤';
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-msg__bubble';
+      bubble.innerHTML = text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+      div.appendChild(avatar);
+      div.appendChild(bubble);
+      chatMsgs.appendChild(div);
+      chatMsgs.scrollTop = chatMsgs.scrollHeight;
+    }
+
+    function addTyping() {
+      const div = document.createElement('div');
+      div.className = 'chat-msg chat-msg--bot';
+      div.id = 'typing';
+      const av = document.createElement('div');
+      av.className = 'chat-msg__avatar';
+      av.textContent = '🔥';
+      const t = document.createElement('div');
+      t.className = 'chat-typing';
+      t.innerHTML = '<span></span><span></span><span></span>';
+      div.appendChild(av); div.appendChild(t);
+      chatMsgs.appendChild(div);
+      chatMsgs.scrollTop = chatMsgs.scrollHeight;
+    }
+
+    function removeTyping() {
+      const t = document.getElementById('typing');
+      if (t) t.remove();
+    }
+
+    async function sendMessage(text) {
+      if (!text.trim()) return;
+      addMsg('user', text);
+      history.push({ role: 'user', content: text });
+      chatInput.value = '';
+      chatSend.disabled = true;
+      document.getElementById('chat-sugs').style.display = 'none';
+      addTyping();
+
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, history: history.slice(-6) }),
+        });
+        const data = await res.json();
+        removeTyping();
+        const reply = data.reply || "Désolé, une erreur est survenue. Appelez-nous au 03 59 43 31 23.";
+        addMsg('bot', reply);
+        history.push({ role: 'assistant', content: reply });
+      } catch(e) {
+        removeTyping();
+        addMsg('bot', "Je suis temporairement indisponible. N'hésitez pas à nous appeler au **03 59 43 31 23**.");
+      }
+      chatSend.disabled = false;
+    }
+
+    chatSend.addEventListener('click', () => sendMessage(chatInput.value));
+    chatInput.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(chatInput.value); } });
+
+    document.querySelectorAll('.chat-sug').forEach(btn => {
+      btn.addEventListener('click', () => sendMessage(btn.dataset.q));
+    });
+  </script>
+</body>
+</html>
